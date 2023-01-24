@@ -1,0 +1,20 @@
+.header_container {
+  border: 1px solid white;
+  position: absolute;
+  width: 100%;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding: 20px;
+
+  .header_links_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 20px;
+    gap: 20px;
+  }
+}
