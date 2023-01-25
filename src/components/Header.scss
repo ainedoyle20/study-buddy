@@ -20,3 +20,25 @@
 
   }
 }
+
+.deck_details_header_container {
+  position: absolute;
+  width: 100%;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding-top: 20px;
+  padding-left: 20px;
+
+  .deck_details_header_back_button_container {
+    z-index: 10;
+    cursor: pointer;
+    font-size: 25px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
