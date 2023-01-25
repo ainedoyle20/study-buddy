@@ -1,8 +1,13 @@
+import { PublicDecksContainer } from "../features/decks/components"
 
-const PublicDecks = () => {
+import "./MyDecksPage.scss";
+
+const PublicDecksPage = () => {
   return (
-    <div>PublicDecks</div>
-  )
+    <div className="my_decks_page_container">
+      <PublicDecksContainer />
+    </div>
+  );
 }
 
-export default PublicDecks;
+export default PublicDecksPage;

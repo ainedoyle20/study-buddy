@@ -1,5 +1,6 @@
 .header_container {
-  border: 1px solid white;
+  z-index: 10;
+  border-bottom: 1px solid white;
   position: absolute;
   width: 100%;
 
@@ -16,5 +17,6 @@
 
     font-size: 20px;
     gap: 20px;
+
   }
 }

@@ -1,0 +1,21 @@
+.auth_page {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .auth_page_landing_link_container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-start;
+
+    font-size: 25px;
+    padding: 20px;
+  }
+}
