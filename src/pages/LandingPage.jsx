@@ -1,11 +1,24 @@
 import Head from "../assets/study-head.svg";
 import Brain from "../assets/study-brain.svg";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectUserDetails } from "../features/authentication/services/userSlice";
+import { useNavigate, Link } from "react-router-dom";
+
 import Book from "../assets/study-book.svg";
 
 import "./LandingPage.scss";
-import { Link } from "react-router-dom";
 
 const LandingPage = () => {
+  const navigate = useNavigate();
+  const userDetails = useSelector(selectUserDetails);
+
+  useEffect(() => {
+    if (userDetails && Object.keys(userDetails).length) {
+      navigate("/my-decks");
+    }
+  }, [userDetails]);
+
   return (
     <div className="landing_page_container">
       <div className="landing_page_auth_link">

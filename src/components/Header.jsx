@@ -1,11 +1,19 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { BiArrowBack } from "react-icons/bi";
+
+import { logoutUser } from "../features/authentication/services/userSlice";
 
 import "./Header.scss";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const { pathname } = useLocation();
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  }
 
   if (pathname === "/" || pathname === "/auth") {
     return null;
@@ -27,6 +35,10 @@ const Header = () => {
         <Link to="/my-decks">My Decks</Link>
         <Link to="public-decks">Public Decks</Link>
       </div>
+
+      <span className="header_logout_btn" onClick={handleLogout}>
+        Logout
+      </span>
     </div>
   );
 }

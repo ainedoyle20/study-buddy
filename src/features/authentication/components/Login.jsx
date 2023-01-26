@@ -1,12 +1,14 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import {TfiEmail} from "react-icons/tfi";
 import {RiLockPasswordLine} from "react-icons/ri";
-import { useNavigate } from 'react-router-dom';
+
+import { loginUser } from "../services/userSlice";
 
 import "./Auth.scss";
 
 const Login = () => {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [loginInfo, setLoginInfo] = useState({ email: "", password: "" });
 
   const handleOnChange = (e) => {
@@ -18,9 +20,11 @@ const Login = () => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
 
-    setLoginInfo({ email: "", password: "" });
+    const { email, password } = loginInfo;
 
-    navigate("/discover");
+    dispatch(loginUser({ email, password }));
+
+    setLoginInfo({ email: "", password: "" });
   }
 
   return (

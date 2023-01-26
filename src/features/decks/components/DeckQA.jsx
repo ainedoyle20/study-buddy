@@ -16,9 +16,12 @@ const DeckQA = ({ question, answer }) => {
         </div>
       </div>
 
-      <div className="deck_q_a_answer_container">
-        <span className="deck_q_a_answer">{answer}</span>
-      </div>
+      {/* {showAnswer ? ( */}
+        <div className="deck_q_a_answer_container">
+          <span className="deck_q_a_answer">{answer}</span>
+        </div>
+      {/* ) : null} */}
+      
     </div>
   );
 }

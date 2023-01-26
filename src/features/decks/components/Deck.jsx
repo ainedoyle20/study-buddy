@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
-const Deck = ({ isPublic, deck }) => {
+const Deck = ({ isPublic, deck, deckId }) => {
   const navigate = useNavigate();
 
   return (
-    <div className='deck' onClick={() => navigate(`${deck.id}`)}>
+    <div className='deck' onClick={() => navigate(`${deckId}`)}>
       <span className='deck_name'>
         {deck?.name}
       </span>

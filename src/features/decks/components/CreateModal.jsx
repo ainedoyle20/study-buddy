@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { ImCancelCircle } from "react-icons/im";
 import { MdOutlineTopic, MdTitle } from "react-icons/md";
+
+import { selectUserDetails } from "../../authentication/services/userSlice";
+import { useAddDeckMutation } from "../services/decksSlice";
 
 import Select from "./Select";
 
@@ -10,7 +14,12 @@ const CreateModal = ({ setShowCreateModal }) => {
   const [categoryOption, setCategoryOption] = useState("Choose Category");
   const [deckName, setDeckName] = useState("");
 
-  const handleCreate = () => {
+  const userDetails = useSelector(selectUserDetails);
+  const [ addNewDeck, { isLoading } ] = useAddDeckMutation();
+
+  const canCreate = !isLoading;
+
+  const handleCreate = async () => {
     if (categoryOption === "Choose Category" && !deckName.length) {
       alert("Please fill out the create deck form.");
       return;
@@ -25,6 +34,33 @@ const CreateModal = ({ setShowCreateModal }) => {
       alert("You must create a deck name.");
       return;
     }
+
+    const { userId, displayName } = userDetails
+    const deckId = "deck-2-id";
+    const newDeck = { 
+      creatorId: userId, 
+      creatorName: displayName, 
+      isImported: false, 
+      isPublic: false, 
+      name: deckName, 
+      category: categoryOption,
+      cards: {}
+    };
+
+    if (!userId || !displayName) {
+      alert("Something went wrong. Please logging out and back in again.");
+      return;
+    }
+
+    if (canCreate) {
+      try {
+        await addNewDeck({ deckId, newDeck, userId});
+        setShowCreateModal(false);
+      } catch (error) {
+        console.log("Failed to create new deck: ", error);
+      }
+    }
+
   }
 
   return (

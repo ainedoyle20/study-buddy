@@ -9,7 +9,7 @@
     &::-webkit-scrollbar {
       display: none;
     }
-
+    position: relative;
     margin-top: 20px;
     width: 80vw;
     height: 100%;
@@ -20,6 +20,13 @@
 
     overflow: scroll;
     padding: 20px;
+
+    .oval_spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
 
     .deck {
       border: 1px solid white;
