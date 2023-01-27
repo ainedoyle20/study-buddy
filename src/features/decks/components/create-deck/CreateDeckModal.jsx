@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { uuidv4 } from "@firebase/util";
 import { ImCancelCircle } from "react-icons/im";
 import { MdOutlineTopic, MdTitle } from "react-icons/md";
 
-import { selectUserDetails } from "../../authentication/services/userSlice";
-import { useAddDeckMutation } from "../services/decksSlice";
+import { selectUserDetails } from "../../../authentication/services/userSlice";
+import { useAddDeckMutation } from "../../services/decksSlice";
 
-import Select from "./Select";
+import Select from "../select/Select";
 
-import "./CreateModal.scss";
+import "./CreateDeckModal.scss";
 
 const CreateModal = ({ setShowCreateModal }) => {
   const [categoryOption, setCategoryOption] = useState("Choose Category");
@@ -36,7 +37,7 @@ const CreateModal = ({ setShowCreateModal }) => {
     }
 
     const { userId, displayName } = userDetails
-    const deckId = "deck-2-id";
+    const deckId = uuidv4();
     const newDeck = { 
       creatorId: userId, 
       creatorName: displayName, 

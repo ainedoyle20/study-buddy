@@ -2,9 +2,15 @@ import { BsPlusLg } from "react-icons/bs";
 
 import "./CreateDeck.scss";
 
-const CreateDeck = ({ setShowCreateModal }) => {
+const CreateDeck = ({ setShowCreateModal, selectDeck }) => {
   return (
-    <div className="create_deck_container" onClick={() => setShowCreateModal(true)}>
+    <div className="create_deck_container" 
+      onClick={() => {
+        if (!selectDeck) {
+          setShowCreateModal(true);
+        }
+      }}
+    >
       <div className="create_deck_button_container">
         <BsPlusLg />
       </div>

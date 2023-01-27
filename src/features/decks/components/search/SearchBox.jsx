@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import { BiSearch } from "react-icons/bi";
 
-import Select from './Select';
+import Select from '../select/Select';
 
 import "./SearchBox.scss";
 
-const SeachBox = ({ isPublic, handleSearch }) => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchOption, setSearchOption] = useState("All");
+const SearchBox = ({ isPublic, setSearchTerm, searchTerm, setSearchOption, searchOption }) => {
 
   return (
     <div className='search_box_container'>
@@ -22,9 +20,6 @@ const SeachBox = ({ isPublic, handleSearch }) => {
 
         <div 
           className='search_icon_container'
-          onClick={() => {
-            handleSearch({ searchTerm, searchOption });
-          }}
         >
           <BiSearch />
         </div>
@@ -36,4 +31,4 @@ const SeachBox = ({ isPublic, handleSearch }) => {
   );
 }
 
-export default SeachBox;
+export default SearchBox;

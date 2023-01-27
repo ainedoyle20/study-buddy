@@ -37,7 +37,7 @@ const PublicDecksPage = () => {
 
   return (
     <div className="my_decks_page_container">
-      <PublicDecksContainer />
+      <PublicDecksContainer userId={userDetails?.userId} />
     </div>
   );
 }

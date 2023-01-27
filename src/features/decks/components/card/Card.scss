@@ -63,6 +63,14 @@
   }
 }
 
+.selectCard {
+  cursor: pointer;
+
+  &:hover {
+    border: 2px solid white;
+  }
+}
+
 .showAnswer {
   height: 200px;
 }

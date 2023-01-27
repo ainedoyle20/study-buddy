@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUserDetails } from "../features/authentication/services/userSlice";
 import { Oval } from "react-loader-spinner";
-
-// import { useFetchDecksQuery } from "../features/decks/services/decksSlice";
 
 import { MyDecksContainer } from "../features/decks/components"
 
@@ -14,15 +12,10 @@ const MyDecksPage = () => {
   const navigate = useNavigate();
   const userDetails = useSelector(selectUserDetails);
 
-  // const [skip ] = useState(userDetails?.userId ? false : true);
-  // const { isUninitialized, data: decks, isLoading, isSuccess } = useFetchDecksQuery(userDetails?.userId, { skip });
-
   useEffect(() => {
     if (!userDetails || !Object.keys(userDetails).length) {
       navigate("/auth");
     }
-
-    console.log("userDetails: ", userDetails);
   }, [userDetails]);
 
   return (
