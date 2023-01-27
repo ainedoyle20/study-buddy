@@ -1,0 +1,62 @@
+.deck_settings_container {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  width: 100%;
+
+  .deck_name_container {
+    border: 1px solid white;
+    border-radius: 10px;
+    width: 40%;
+    height: 250px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .deck_settings {
+    border: 1px solid white;
+    width: 55%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+
+    .deck_setting_container {
+      border: 1px solid white;
+      display: flex;
+      align-items: center;
+
+      .deck_setting_label {
+        border: 1px solid white;
+        width: 150px;
+        font-size: 22px;
+      }
+
+      .deck_setting {
+        border: 1px solid white;
+        width: 100%;
+        font-size: 20px;
+        padding-left: 5px;
+      }
+
+      .edit_setting_icon {
+        display: flex;
+        align-items: center;
+        font-size: 25px;
+        padding: 5px;
+        margin: 0px 5px;
+        cursor: pointer;
+      }
+
+      .deck_imported_setting {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+  
+}

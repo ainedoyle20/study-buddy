@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Oval } from 'react-loader-spinner';
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { MdOutlineClose } from "react-icons/md";
 
@@ -10,6 +9,7 @@ import DeleteDeckWarning from '../delete-deck/DeleteDeckWarning';
 import CreateDeck from "../deck/CreateDeck";
 import Deck from "../deck/Deck";
 import SearchBox from "../search/SearchBox";
+import Loader from '../loader/Loader';
 
 import "./DecksContainers.scss";
 
@@ -43,9 +43,7 @@ const MyDecksContainer = ({ userId }) => {
 
   let content;
   if (isLoading || isUninitialized) {
-    content = <div className='oval_spinner'> <Oval  height={80} width={80} color="#ffffff" wrapperStyle={{}} wrapperClass=""
-      visible={true} ariaLabel='oval-loading' secondaryColor="#ffffff" strokeWidth={5} strokeWidthSecondary={4}
-    /></div>;
+    content = <Loader />;
   } else if (isSuccess) {
     content = Object.keys(decks).map(deckId => {
       if (decks[deckId].category === searchOption || searchOption === "All") {

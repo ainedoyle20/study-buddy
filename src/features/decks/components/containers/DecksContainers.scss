@@ -51,12 +51,12 @@
     overflow: scroll;
     padding: 20px;
 
-    .oval_spinner {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
+    // .oval_spinner {
+    //   position: absolute;
+    //   top: 50%;
+    //   left: 50%;
+    //   transform: translate(-50%, -50%);
+    // }
 
     .deck {
       border: 1px solid white;
@@ -71,7 +71,7 @@
       justify-content: center;
 
       .deck_name {
-        font-size: 35px;
+        font-size: 20px;
         margin-bottom: 25px;
       }
 

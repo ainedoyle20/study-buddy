@@ -71,6 +71,36 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       },
       invalidatesTags: ["Decks"]
     }),
+    updateDeckSettings: builder.mutation({
+      async queryFn({ deckId, deck, userId }) {
+        const docRef = doc(db, "decks", userId);
+        try {
+          await updateDoc(docRef, {
+            [deckId]: { ...deck }
+          })
+          return {data: null}
+        } catch (error) {
+          console.log("Error updating deck: ", error);
+          return { error: error.message}
+        }
+      },
+      invalidatesTags: ["Decks"]
+    }),
+    updateDeckStatus: builder.mutation({
+      async queryFn({ deckId, isPublic, userId }) {
+        const docRef = doc(db, "decks", userId);
+        try {
+          await updateDoc(docRef, {
+            [`${deckId}.isPublic`]: isPublic
+          })
+          return {data: null}
+        } catch (error) {
+          console.log("Error updating deck status: ", error);
+          return { error: error.message}
+        }
+      },
+      invalidatesTags: ["Decks"]
+    }),
     addCard: builder.mutation({
       async queryFn({ deckId, cardId, newCard, userId }) {
         const docRef = doc(db, "decks", userId);
@@ -104,4 +134,8 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
   })
 });
 
-export const { useFetchPublicDecksQuery, useFetchDecksQuery, useAddDeckMutation, useRemoveDeckMutation, useAddCardMutation, useRemoveCardMutation } = extendedApiSlice;
+export const { 
+  useFetchPublicDecksQuery, useFetchDecksQuery, useAddDeckMutation, 
+  useRemoveDeckMutation, useUpdateDeckSettingsMutation, useUpdateDeckStatusMutation,
+  useAddCardMutation, useRemoveCardMutation 
+} = extendedApiSlice;

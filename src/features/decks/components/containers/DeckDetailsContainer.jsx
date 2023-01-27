@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Oval } from "react-loader-spinner";
 import { AiOutlinePlus } from "react-icons/ai";
 import { MdOutlineClose } from "react-icons/md";
 import { AiFillEdit } from "react-icons/ai";
@@ -9,9 +8,11 @@ import { AiFillEdit } from "react-icons/ai";
 import { selectUserDetails } from "../../../authentication/services/userSlice";
 import { useFetchDecksQuery } from '../../services/decksSlice';
 
+import DeckSettings from "../deck-settings/DeckSettings";
 import Card from "../card/Card";
 import AddCardModal from "../add-card/AddCardModal";
 import EditDeleteCardModal from "../edit-delete-card/EditDeleteCardModal";
+import Loader from "../loader/Loader";
 
 import "./DeckDetailsContainer.scss";
 
@@ -57,9 +58,7 @@ const DeckDetailsContainer = () => {
 
   let content;
   if (isUninitialized || isLoading) {
-    content = <div className='oval_spinner'> <Oval  height={40} width={40} color="#ffffff" wrapperStyle={{}} wrapperClass=""
-      visible={true} ariaLabel='oval-loading' secondaryColor="#ffffff" strokeWidth={5} strokeWidthSecondary={4}
-    /></div>;
+    content = <Loader />;
   } else {
     content = cards.length 
     ? cards.map(card => (
@@ -77,7 +76,8 @@ const DeckDetailsContainer = () => {
   return (
     <>
       <div className="deck_details_container">
-        <div className="deck_details_heading">
+        <DeckSettings deck={deck} />
+        {/* <div className="deck_details_heading">
           <div className="deck_details_heading_deck">
             <span>{deck?.name}</span>
           </div>
@@ -85,7 +85,7 @@ const DeckDetailsContainer = () => {
           <div className="deck_details_heading_deck_details">
             
           </div>
-        </div>
+        </div> */}
 
         <div className="toggle_modals_icons_container">
           {selectCard ? (
