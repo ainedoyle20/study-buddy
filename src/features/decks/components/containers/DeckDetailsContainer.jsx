@@ -76,16 +76,7 @@ const DeckDetailsContainer = () => {
   return (
     <>
       <div className="deck_details_container">
-        <DeckSettings deck={deck} />
-        {/* <div className="deck_details_heading">
-          <div className="deck_details_heading_deck">
-            <span>{deck?.name}</span>
-          </div>
-
-          <div className="deck_details_heading_deck_details">
-            
-          </div>
-        </div> */}
+        <DeckSettings deck={deck} userId={userDetails?.userId} setSkip={setSkip} />
 
         <div className="toggle_modals_icons_container">
           {selectCard ? (

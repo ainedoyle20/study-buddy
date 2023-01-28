@@ -72,11 +72,11 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ["Decks"]
     }),
     updateDeckSettings: builder.mutation({
-      async queryFn({ deckId, deck, userId }) {
+      async queryFn({ deckId, field, value, userId }) {
         const docRef = doc(db, "decks", userId);
         try {
           await updateDoc(docRef, {
-            [deckId]: { ...deck }
+            [`${deckId}.${field}`]: value
           })
           return {data: null}
         } catch (error) {
@@ -87,12 +87,25 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ["Decks"]
     }),
     updateDeckStatus: builder.mutation({
-      async queryFn({ deckId, isPublic, userId }) {
+      async queryFn({ deckId, deck, userId }) {
         const docRef = doc(db, "decks", userId);
         try {
           await updateDoc(docRef, {
-            [`${deckId}.isPublic`]: isPublic
+            [`${deckId}.isPublic`]: deck.isPublic
           })
+
+          if (deck?.isPublic) {
+            // add deck to public decks
+            await updateDoc(doc(db, "public-decks", "PUBLIC-DECKS"), {
+              [deckId]: { ...deck }
+            })
+          } else {
+            // remove deck from public decks
+            await updateDoc(doc(db, "public-decks", "PUBLIC-DECKS"), {
+              [deckId]: deleteField()
+            })
+          }
+
           return {data: null}
         } catch (error) {
           console.log("Error updating deck status: ", error);
