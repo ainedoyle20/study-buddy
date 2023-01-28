@@ -24,13 +24,7 @@ const Deck = ({ isPublic, deck, deckId, selectDeck, setSelectedDeck, setShowDele
 
       {isPublic ? (
         <span className='deck_creator'>
-          Created By: {deck?.creator}
-        </span>
-      ) : null}
-
-      {deck?.isImported && !isPublic ? (
-        <span className='deck_creator'>
-          Original Creator: {deck?.creator}
+          Created By: {deck?.creatorName}
         </span>
       ) : null}
     </div>

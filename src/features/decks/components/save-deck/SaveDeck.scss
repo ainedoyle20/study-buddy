@@ -1,0 +1,15 @@
+.save_deck_container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  .save_deck_text {
+    position: relative;
+    cursor: pointer;
+    font-size: 20px;
+    border-bottom: 1px solid white;
+    padding: 0px 5px;
+    width: 110px;
+  }
+}

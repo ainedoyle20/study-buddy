@@ -7,7 +7,7 @@ import { useAddCardMutation, useRemoveCardMutation } from "../../services/decksS
 
 import "./EditDeleteCardModal.scss";
 
-const EditDeleteCardModal = ({ setShowEditCardModal, userId, setSkip, setSelectCard, setSelectedCard, deckId, selectedCard }) => {
+const EditDeleteCardModal = ({ setShowEditCardModal, userId, setSkip, setSelectCard, setSelectedCard, deckId, selectedCard, isPublicDeck }) => {
   const [editedQuestion, setEditedQuestion] = useState(selectedCard?.question || "");
   const [editedAnswer, setEditedAnswer] = useState(selectedCard?.answer ||  "");
   const [showDeleteCardWarning, setShowDeleteCardWarning] = useState(false);
@@ -48,7 +48,7 @@ const EditDeleteCardModal = ({ setShowEditCardModal, userId, setSkip, setSelectC
     const { cardId, timestamp } = selectedCard;
 
     try {
-      await editCard({ deckId, cardId, newCard: { question: editedQuestion, answer: editedAnswer, timestamp }, userId });
+      await editCard({ deckId, cardId, newCard: { question: editedQuestion, answer: editedAnswer, timestamp }, userId, isPublic: isPublicDeck });
       setShowEditCardModal(false);
     } catch (error) {
       console.log("Error editing card: ", error);
@@ -58,7 +58,7 @@ const EditDeleteCardModal = ({ setShowEditCardModal, userId, setSkip, setSelectC
   const handleDeleteCard = async () => {
     setSkip(true);
     try {
-      await removeCard({ deckId, cardId: selectedCard.cardId, userId }).unwrap();
+      await removeCard({ deckId, cardId: selectedCard.cardId, userId, isPublic: isPublicDeck }).unwrap();
       setShowEditCardModal(false);
     } catch (error) {
       console.log("Error removing card from deck: ", error);

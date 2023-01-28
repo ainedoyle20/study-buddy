@@ -1,0 +1,31 @@
+.saved_deck_banner_container {
+  // border: 1px solid white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+
+  display: flex;
+  justify-content: center;
+
+  padding: 15px 0px;
+
+  .saved_deck_banner {
+    // border: 1px solid white;
+
+    display: flex;
+    justify-content: center;
+
+    padding: 20px;
+    font-size: 25px;
+
+    opacity: 1;
+    transition: opacity 2000ms;
+  }
+}
+
+.hide_saved_banner {
+  .saved_deck_banner {
+    opacity: 0;
+  }
+}

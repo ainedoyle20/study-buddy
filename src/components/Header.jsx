@@ -32,8 +32,8 @@ const Header = () => {
   return (
     <div className="header_container">
       <div className="header_links_container">
-        <Link to="/my-decks">My Decks</Link>
-        <Link to="public-decks">Public Decks</Link>
+        <Link to="/my-decks" className={`${pathname === "/my-decks" ? "active_header_link" : ""} header_link`}>My Decks</Link>
+        <Link to="public-decks" className={`${pathname === "/public-decks" ? "active_header_link" : ""} header_link`}>Public Decks</Link>
       </div>
 
       <span className="header_logout_btn" onClick={handleLogout}>

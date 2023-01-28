@@ -72,12 +72,19 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ["Decks"]
     }),
     updateDeckSettings: builder.mutation({
-      async queryFn({ deckId, field, value, userId }) {
+      async queryFn({ deckId, field, value, userId, isPublic }) {
         const docRef = doc(db, "decks", userId);
         try {
           await updateDoc(docRef, {
             [`${deckId}.${field}`]: value
-          })
+          });
+
+          if (isPublic) {
+            await updateDoc(doc(db, "public-decks", "PUBLIC-DECKS"), {
+              [`${deckId}.${field}`]: value
+            });
+          }
+
           return {data: null}
         } catch (error) {
           console.log("Error updating deck: ", error);
@@ -114,13 +121,36 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       },
       invalidatesTags: ["Decks"]
     }),
+    saveDeck: builder.mutation({
+      async queryFn({ deckId, deck, userId }) {
+        const docRef = doc(db, "decks", userId);
+        try {
+          await updateDoc(docRef, {
+            [deckId]: { ...deck, creatorId: userId, isImported: true, isPublic: false, originalName: deck.name }
+          })
+
+          return {data: null}
+        } catch (error) {
+          console.log("Error saving deck: ", error);
+          return { error: error.message}
+        }
+      },
+      invalidatesTags: ["Decks"]
+    }),
     addCard: builder.mutation({
-      async queryFn({ deckId, cardId, newCard, userId }) {
+      async queryFn({ deckId, cardId, newCard, userId, isPublic }) {
         const docRef = doc(db, "decks", userId);
         try {
           await updateDoc(docRef, {
             [`${deckId}.cards.${cardId}`]: {...newCard}
           })
+
+          if (isPublic) {
+            await updateDoc(doc(db, "public-decks", "PUBLIC-DECKS"), {
+              [`${deckId}.cards.${cardId}`]: {...newCard}
+            })
+          }
+
           return {data: null}
         } catch (error) {
           console.log("Error adding card: ", error);
@@ -130,12 +160,19 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ["Decks"]
     }),
     removeCard: builder.mutation({
-      async queryFn({ deckId, cardId, userId }) {
+      async queryFn({ deckId, cardId, userId, isPublic }) {
         const docRef = doc(db, "decks", userId);
         try {
           await updateDoc(docRef, {
             [`${deckId}.cards.${cardId}`]: deleteField()
           })
+
+          if (isPublic) {
+            await updateDoc(doc(db, "public-decks", "PUBLIC-DECKS"), {
+              [`${deckId}.cards.${cardId}`]: deleteField()
+            })
+          }
+
           return {data: null}
         } catch (error) {
           console.log("Error deleting card: ", error);
@@ -148,7 +185,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 });
 
 export const { 
-  useFetchPublicDecksQuery, useFetchDecksQuery, useAddDeckMutation, 
+  useFetchPublicDecksQuery, useFetchDecksQuery, useAddDeckMutation, useSaveDeckMutation,
   useRemoveDeckMutation, useUpdateDeckSettingsMutation, useUpdateDeckStatusMutation,
   useAddCardMutation, useRemoveCardMutation 
 } = extendedApiSlice;

@@ -6,17 +6,50 @@
 
   .deck_name_container {
     border: 1px solid white;
+    position: relative;
     border-radius: 10px;
     width: 40%;
     height: 250px;
+    font-size: 30px;
 
     display: flex;
     justify-content: center;
     align-items: center;
+
+    .name_icons {
+      position: absolute;
+      top: 10px;
+      right: 5px;
+
+      width: 70px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap:10px;
+
+      .icon {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        font-size: 22px;
+      }
+    }
+
+    .deck_name_input {
+      font-size: 25px;
+      background-color: rgb(0, 0, 35);
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 1px solid white;
+      outline: none;
+      padding: 2px 8px;
+      color: white;
+    }
   }
 
   .deck_settings {
-    border: 1px solid white;
     min-width: 55%;
     height: 250px;
     display: flex;
@@ -39,6 +72,7 @@
       }
 
       .deck_setting {
+        position: relative;
         width: 200px;
         font-size: 20px;
         margin-left: 10px;

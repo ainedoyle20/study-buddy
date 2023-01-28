@@ -9,7 +9,7 @@ import { useAddCardMutation } from "../../services/decksSlice";
 
 import "./AddCardModal.scss";
 
-const AddCardModal = ({ setShowAddCardModal, userId, setSkip }) => {
+const AddCardModal = ({ setShowAddCardModal, userId, setSkip, isPublicDeck }) => {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
 
@@ -35,7 +35,13 @@ const AddCardModal = ({ setShowAddCardModal, userId, setSkip }) => {
     setSkip(true);
 
     try {
-      await addNewCard({ deckId, cardId: uuidv4(), newCard: { question, answer, timestamp: Date.now() }, userId }).unwrap();
+      await addNewCard({ 
+        deckId, 
+        cardId: uuidv4(), 
+        newCard: { question, answer, timestamp: Date.now() }, 
+        userId,
+        isPublic: isPublicDeck
+      }).unwrap();
     } catch (error) {
       console.log("Error adding card to deck.", error);
     }
