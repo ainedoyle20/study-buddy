@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import {TfiEmail} from "react-icons/tfi";
 import {RiLockPasswordLine} from "react-icons/ri";
 import { VscAccount } from "react-icons/vsc";
+import { Oval } from 'react-loader-spinner';
 
 import { registerUser } from "../services/userSlice";
 
@@ -10,6 +11,8 @@ import "./Auth.scss";
 
 const Register = () => {
   const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(false);
   const [registerInfo, setRegisterInfo] = useState({ userDisplayName: "", email: "", password: "", confirmPassword: ""});
 
   const handleOnChange = (e) => {
@@ -31,6 +34,11 @@ const Register = () => {
     if (userDisplayName && email && password) {
       dispatch(registerUser({ userDisplayName, email, password }))
     }
+
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
 
     setRegisterInfo({ userDisplayName: "", email: "", password: "", confirmPassword: ""});
   }
@@ -97,7 +105,23 @@ const Register = () => {
         />
       </div>
 
-      <button type="submit" className='auth_form_submit_button'>Register</button>
+      <button disabled={loading} type="submit" className='auth_form_submit_button'>
+        {loading 
+          ? <span className='auth_form_submit_button_loader'>
+              <Oval
+                height={20}
+                width={20}
+                color="#ffffff"
+                visible={true}
+                ariaLabel='oval-loading'
+                secondaryColor="#ffffff"
+                strokeWidth={6}
+                strokeWidthSecondary={6}
+              />
+            </span>
+          : "Register"
+        }
+      </button>
     </form>
   );
 }

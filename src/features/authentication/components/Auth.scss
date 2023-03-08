@@ -42,6 +42,7 @@
 
 /* Register & Login Forms */
 .auth_form {
+  position: relative;
   border: 1px solid white;
   border-radius: 10px;
 
@@ -55,6 +56,18 @@
 
   padding: 20px;
   margin-top: 30px;
+}
+
+.user_login_details {
+  position: absolute;
+  top: 15px;
+  width: 100%;
+  font-size: small;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  color: white;
 }
 
 .auth_form_input_container {
@@ -96,6 +109,13 @@
   font-size: 20px;
   padding: 5px 0px;
   cursor: pointer;
+}
+
+.auth_form_submit_button_loader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media only screen and (min-width: 2000px) {
